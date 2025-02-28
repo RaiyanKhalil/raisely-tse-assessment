@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TSE Assessment - Customer Registration Form</title>
+    <style>
+      /* Removed css classes  which are not requred*/
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Remove
+        div.form-container {
+        display: block;
+      } */
+
+      .input-field {
+        margin: 10px 0;
+        padding: 8px;
+        border: 1px solid #ccc;
+      }
+
+      /* Remove
+        div.form-container form .input-field {
+        border: 2px solid red;
+      } */
+
+      .submit-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .submit-button {
+          background-color: #007bff;
+          color: white; /* Fixed overriden text color */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <form id="registrationForm">
+        <input type="text" class="input-field" placeholder="Name" required />
+        <input type="email" class="input-field" placeholder="Email" required />
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById("registrationForm");
+      form.onsubmit = function (e) {
+        // Added preventDefault() to stop default behavior
+        e.preventDefault();
+
+        // Print console log and displays alert if form is successfully submitted
+        if(validateForm()){
+          console.log("Form Submitted")
+          alert("Form Submitted Successfully!")
+          // Reload page after alert is dismissed by clicking "OK"
+          location.reload();
+        } else {
+          console.log("Please fill out all fields.");
+        }
+      };
+
+      function validateForm() {
+        const inputs = document.querySelectorAll(".input-field");
+        let isValid = true;
+
+        inputs.forEach((input) => {
+          if (!input.value.trim()) {
+            isValid = false;
+            input.style.border = "2px solid red";
+          } else {
+            input.style.border = "1px solid #ccc"
+          }
+        });
+        // Return Boolean value of either true or false
+        return isValid;
+      }
+    </script>
+  </body>
+</html>
